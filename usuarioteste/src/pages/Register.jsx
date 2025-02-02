@@ -1,6 +1,7 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material"
 import { useForm } from "react-hook-form"
 import { api } from "../services/api"
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
 
@@ -14,21 +15,24 @@ const Register = () => {
     })
 
     const { register, handleSubmit, formState: { errors }, watch } = form
+    const navigate = useNavigate()
 
     const onSubmit = async (data) => {
         try {
             // Realizando a requisição POST para o cadastro
-            const response = await api.post('/usuarios/registro', {
-                nome: data.nome,
+            const response = await api.post('/users/teste', {
+                name: data.nome,
                 email: data.email,
-                senha: data.senha,
-                perfilId: '65f4a5e8b91f5c8d3a123456',
-                clinicaId: '65f4a5e8b91f5c8d3a1234567'
+                password: data.senha,
+              
             })
             console.log('Cadastro realizado com sucesso:', response.data)
+            window.alert('Cadastro realizado com sucesso!')
+            navigate('/')
             // Aqui você pode redirecionar o usuário ou exibir uma mensagem de sucesso
         } catch (error) {
             console.error('Erro ao cadastrar:', error.response?.data || error.message)
+            window.alert('Erro ao cadastrar!')
             // Aqui você pode exibir uma mensagem de erro ao usuário
         }
     }
