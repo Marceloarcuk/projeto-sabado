@@ -44,9 +44,9 @@ const Login = () => {
     const onSubmit = async (data) => {
         try {
             // Realizando a requisição POST para o login
-            const response = await api.post('/usuarios/login', {
+            const response = await api.post('/users/login', {
                 email: data.usuario,
-                senha: data.senha,
+                password: data.senha,
             });
             login(response.data)
             navigate('/usuario')
